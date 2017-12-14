@@ -106,12 +106,18 @@ esquina(C,N,D,M,L,Acc):-
 				Acc1 is Acc+1,
 				esquina(C1,N1,D1,M1,L,Acc1).
 
+
+
+
+writes([A|B]):-write(A),write(' '),writes(B).
+writes([A|[]]):-write(A).
+
 esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
 %esquima izq
 blanca_esquina(f,7,C,D,A,B,E,F):-write('L\'UUL+'),
-girar_L(f,7,A1,B1),girar_L(A1,B1,A2,B2),girar_L(A2,B2,A3,B3),girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
-girar_L(C,D,C1,D1),girar_L(C1,D1,C2,D2),girar_L(C2,D2,C3,D3),girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F).
-
+girar_L(f,7,A1,B1), girar_L(A1,B1,A2,B2), girar_L(A2,B2,A3,B3), girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
+girar_L(C,D,C1,D1), girar_L(C1,D1,C2,D2), girar_L(C2,D2,C3,D3), girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F),
+writes([A1,B1,A2,B2,A3,B3,A4,B4,A5,B5,A,B]).
 
 
 
@@ -149,7 +155,9 @@ girar_U(b,X,A,B):-A=r,B=X.
 girar_U(r,X,A,B):-X\==4,A=f,B=X.
 
 %%%%%%UUUUU%%%%%%%
+girar_U(A,B,C,D):-girar_U(A,C),girar(B,D).
 girar_U(t,A):- A=t.
+girar_U(d,A):- A=d.
 girar_U(b,A):- A=r.
 girar_U(r,A):- A=f.
 girar_U(f,A):- A=l.
@@ -166,6 +174,7 @@ girar_U(9,B):- B=7.
 
 girar_D(A,B,C,D):-girar_D(A,C),girar(B,D).
 girar_D(d,A):- A=d.
+girar_D(t,A):- A=t.
 girar_D(f,A):- A=r.
 girar_D(r,A):- A=b.
 girar_D(b,A):- A=l.
@@ -173,6 +182,7 @@ girar_D(l,A):- A=f.
 
 girar_F(A,B,C,D):-girar_F(A,C),girar(B,D).
 girar_F(f,A):- A=f.
+girar_F(b,A):- A=b.
 girar_F(t,A):- A=r.
 girar_F(r,A):- A=d.
 girar_F(d,A):- A=l.
@@ -180,6 +190,7 @@ girar_F(l,A):- A=t.
 
 girar_B(A,B,C,D):-girar_B(A,C),girar(B,D).
 girar_B(b,A):- A=b.
+girar_B(f,A):- A=f.
 girar_B(t,A):- A=l.
 girar_B(l,A):- A=d.
 girar_B(d,A):- A=r.
@@ -187,6 +198,7 @@ girar_B(r,A):- A=t.
 
 girar_R(A,B,C,D):-girar_R(A,C),girar(B,D).
 girar_R(r,A):- A=r.
+girar_R(l,A):- A=l.
 girar_R(t,A):- A=b.
 girar_R(b,A):- A=d.
 girar_R(d,A):- A=f.
@@ -194,6 +206,7 @@ girar_R(f,A):- A=t.
 
 girar_L(A,B,C,D):-girar_L(A,C),girar(B,D).
 girar_L(l,A):- A=l.
+girar_L(r,A):- A=r.
 girar_L(t,A):- A=f.
 girar_L(f,A):- A=d.
 girar_L(d,A):- A=b.
