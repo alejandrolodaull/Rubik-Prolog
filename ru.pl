@@ -94,156 +94,185 @@ e42("RU\'R\'ddyR\'U\'RU\'R\'UR").
 esquina(r,7,r,4,L,Acc):-e42(L).
 
 
-
 e(A,B,C,D):-esquina(A,B,C,D).
 esquina(A,B,C,D):-esquina(A,B,C,D,L),write(L).
 esquina(C,N,D,M,L):-esquina(C,N,D,M,L,0).
 
 esquina(C,N,D,M,L,Acc):-
 				Acc<3,
-				girar(C,N,C1,N1),
-				girar(D,M,D1,M1),
+				girar_U(C,N,C1,N1),
+				girar_U(D,M,D1,M1),
 				write('U+'),
 				Acc1 is Acc+1,
 				esquina(C1,N1,D1,M1,L,Acc1).
 
-
-girar(t,1,A,B):-A=t,B=3.
-girar(t,2,A,B):-A=t,B=6.
-girar(t,3,A,B):-A=t,B=9.
-girar(t,4,A,B):-A=t,B=2.
-girar(t,5,A,B):-A=t,B=5.
-girar(t,6,A,B):-A=t,B=8.
-girar(t,7,A,B):-A=t,B=1.
-girar(t,8,A,B):-A=t,B=4.
-girar(t,9,A,B):-A=t,B=7.
-
-girar(f,6,A,B):-A=f,B=6.
-girar(r,4,A,B):-A=r,B=4.
-
-girar(f,X,A,B):- X\==6,A=l,B=X.
-girar(l,X,A,B):-A=b,B=X.
-girar(b,X,A,B):-A=r,B=X.
-girar(r,X,A,B):-X\==4,A=f,B=X.
+esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
+%esquima izq
+blanca_esquina(f,7,C,D,A,B,E,F):-write('L\'UUL+'),
+girar_L(f,7,A1,B1),girar_L(A1,B1,A2,B2),girar_L(A2,B2,A3,B3),girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
+girar_L(C,D,C1,D1),girar_L(C1,D1,C2,D2),girar_L(C2,D2,C3,D3),girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F).
 
 
-girar(t,A):- A=t.
-girar(b,A):- A=r.
-girar(r,A):- A=f.
-girar(f,A):- A=l.
-girar(l,A):- A=b.
+
+
+%
+%blanca_esquina(l,9)
+%blanca_esquina(d,1)
+
+%esquina fondo
+%blanca_esquina(b,9)
+%blanca_esquina(l,7)
+%blanca_esquina(d,7)
+
+%esquina derecha
+%blanca_esquina(b,7)
+%blanca_esquina(r,9)
+%blanca_esquina(d,9)
+
+
+girar_U(t,1,A,B):-A=t,B=3.
+girar_U(t,2,A,B):-A=t,B=6.
+girar_U(t,3,A,B):-A=t,B=9.
+girar_U(t,4,A,B):-A=t,B=2.
+girar_U(t,5,A,B):-A=t,B=5.
+girar_U(t,6,A,B):-A=t,B=8.
+girar_U(t,7,A,B):-A=t,B=1.
+girar_U(t,8,A,B):-A=t,B=4.
+girar_U(t,9,A,B):-A=t,B=7.
+
+girar_U(f,6,A,B):-A=f,B=6.
+girar_U(r,4,A,B):-A=r,B=4.
+
+girar_U(f,X,A,B):- X\==6,A=l,B=X.
+girar_U(l,X,A,B):-A=b,B=X.
+girar_U(b,X,A,B):-A=r,B=X.
+girar_U(r,X,A,B):-X\==4,A=f,B=X.
+
+%%%%%%UUUUU%%%%%%%
+girar_U(t,A):- A=t.
+girar_U(b,A):- A=r.
+girar_U(r,A):- A=f.
+girar_U(f,A):- A=l.
+girar_U(l,A):- A=b.
+girar_U(1,B):- B=3.
+girar_U(2,B):- B=6.
+girar_U(3,B):- B=9.
+girar_U(4,B):- B=2.
+girar_U(5,B):- B=5.
+girar_U(6,B):- B=8.
+girar_U(7,B):- B=1.
+girar_U(8,B):- B=4.
+girar_U(9,B):- B=7.
+
+girar_D(A,B,C,D):-girar_D(A,C),girar(B,D).
+girar_D(d,A):- A=d.
+girar_D(f,A):- A=r.
+girar_D(r,A):- A=b.
+girar_D(b,A):- A=l.
+girar_D(l,A):- A=f.
+
+girar_F(A,B,C,D):-girar_F(A,C),girar(B,D).
+girar_F(f,A):- A=f.
+girar_F(t,A):- A=r.
+girar_F(r,A):- A=d.
+girar_F(d,A):- A=l.
+girar_F(l,A):- A=t.
+
+girar_B(A,B,C,D):-girar_B(A,C),girar(B,D).
+girar_B(b,A):- A=b.
+girar_B(t,A):- A=l.
+girar_B(l,A):- A=d.
+girar_B(d,A):- A=r.
+girar_B(r,A):- A=t.
+
+girar_R(A,B,C,D):-girar_R(A,C),girar(B,D).
+girar_R(r,A):- A=r.
+girar_R(t,A):- A=b.
+girar_R(b,A):- A=d.
+girar_R(d,A):- A=f.
+girar_R(f,A):- A=t.
+
+girar_L(A,B,C,D):-girar_L(A,C),girar(B,D).
+girar_L(l,A):- A=l.
+girar_L(t,A):- A=f.
+girar_L(f,A):- A=d.
+girar_L(d,A):- A=b.
+girar_L(b,A):- A=t.
+
+girar(1,B):- B=3.
+girar(2,B):- B=6.
+girar(3,B):- B=9.
+girar(4,B):- B=2.
+girar(5,B):- B=5.
+girar(6,B):- B=8.
+girar(7,B):- B=1.
+girar(8,B):- B=4.
+girar(9,B):- B=7.
 
 
 
 
 top(A,B,C,D,E,F,G,H,I):-top(A,B,C,D,E,F,G,H,I,0).
 
-top(b,t,r,t,t,t,t,t,f,Acc):-	Acc<4, 
-				write("RUR\'URUUR\'").
-top(b,t,t,t,t,t,f,t,r,Acc):-	Acc<4, 
-				write("RUUR\'U\'RU\'R\'").
-top(l,t,b,t,t,t,l,t,f,Acc):-	Acc<4, 
-				write("fRUR\'U\'f\'FRUR\'U\'F\'").
-top(b,t,b,t,t,t,f,t,f,Acc):-	Acc<4, 
-				write("FRUR\'U\'RUR\'U\'RUR\'U\'F\'").
-top(b,t,t,t,t,t,f,t,t,Acc):-	Acc<4, 
-				write("rUR\'U\'r\'FRF\'").
-top(l,t,t,t,t,t,t,t,f,Acc):-	Acc<4, 
-				write("F\'rUR\'U\'r\'FR").
-top(t,t,t,t,t,t,f,t,f,Acc):-	Acc<4, 
-				write("RRDR\'UURD\'R\'UUR\'").
-top(t,t,t,t,t,t,t,t,t,Acc):-	Acc<4, 
-				write("Solved").
+top(b,t,r,t,t,t,t,t,f,Acc):-	Acc<4,				write("RUR\'URUUR\'").
+top(b,t,t,t,t,t,f,t,r,Acc):-	Acc<4,				write("RUUR\'U\'RU\'R\'").
+top(l,t,b,t,t,t,l,t,f,Acc):-	Acc<4,				write("fRUR\'U\'f\'FRUR\'U\'F\'").
+top(b,t,b,t,t,t,f,t,f,Acc):-	Acc<4,				write("FRUR\'U\'RUR\'U\'RUR\'U\'F\'").
+top(b,t,t,t,t,t,f,t,t,Acc):-	Acc<4,				write("rUR\'U\'r\'FRF\'").
+top(l,t,t,t,t,t,t,t,f,Acc):-	Acc<4,				write("F\'rUR\'U\'r\'FR").
+top(t,t,t,t,t,t,f,t,f,Acc):-	Acc<4,				write("RRDR\'UURD\'R\'UUR\'").
+top(t,t,t,t,t,t,t,t,t,Acc):-	Acc<4,				write("Solved").
 %E1-E2
-top(t,b,t,t,t,t,t,f,t,Acc):-	Acc<4, 
-				write("RUR\'U\'M\'URU\'r\'").
-top(t,b,t,l,t,t,t,t,t,Acc):-	Acc<4, 
-				write("M\'UMUUM\'UM").
+top(t,b,t,t,t,t,t,f,t,Acc):-	Acc<4,				write("RUR\'U\'M\'URU\'r\'").
+top(t,b,t,l,t,t,t,t,t,Acc):-	Acc<4,				write("M\'UMUUM\'UM").
 %P1-P4
-top(l,b,t,l,t,t,l,t,t,Acc):-	Acc<4, 
-				write("fRUR\'U\'f\'").
-top(t,b,r,t,t,r,t,t,r,Acc):-	Acc<4, 
-				write("f\'L\'U\'LUf").
-top(b,b,t,l,t,t,f,t,t,Acc):-	Acc<4, 
-				write("RUB\'U\'R\'URBR\'").
-top(b,t,t,l,t,t,f,f,t,Acc):-	Acc<4, 
-				write("R\'U\'FURU\'R\'F\'R").
+top(l,b,t,l,t,t,l,t,t,Acc):-	Acc<4,				write("fRUR\'U\'f\'").
+top(t,b,r,t,t,r,t,t,r,Acc):-	Acc<4,				write("f\'L\'U\'LUf").
+top(b,b,t,l,t,t,f,t,t,Acc):-	Acc<4,				write("RUB\'U\'R\'URBR\'").
+top(b,t,t,l,t,t,f,f,t,Acc):-	Acc<4,				write("R\'U\'FURU\'R\'F\'R").
 %W1-W2
-top(b,t,t,t,t,r,t,f,r,Acc):-	Acc<4, 
-				write("RUR\'URU\'R\'U\'R\'FRF\'").
-top(t,t,b,l,t,t,l,f,t,Acc):-	Acc<4, 
-				write("L\'U\'LU\'L\'ULULF\'L\'F").
+top(b,t,t,t,t,r,t,f,r,Acc):-	Acc<4,				write("RUR\'URU\'R\'U\'R\'FRF\'").
+top(t,t,b,l,t,t,l,f,t,Acc):-	Acc<4,				write("L\'U\'LU\'L\'ULULF\'L\'F").
 %S1-S2
-top(l,t,t,l,t,t,f,f,r,Acc):-	Acc<4, 
-				write("rUUR\'U\'RU\'r\'").
-top(b,b,r,l,t,t,l,t,t,Acc):-	Acc<4, 
-				write("r\'UURUR\'Ur").
+top(l,t,t,l,t,t,f,f,r,Acc):-	Acc<4,				write("rUUR\'U\'RU\'r\'").
+top(b,b,r,l,t,t,l,t,t,Acc):-	Acc<4,				write("r\'UURUR\'Ur").
 %L1-L6
-top(l,t,b,t,t,r,l,f,f,Acc):-	Acc<4, 
-				write("FRUR\'U\'RUR\'U\'F\'").
-top(b,t,r,l,t,t,f,f,r,Acc):-	Acc<4, 
-				write("F\'L\'U\'LUL\'U\'LUF").
-top(l,t,r,t,t,r,l,f,r,Acc):-	Acc<4, 
-				write("l\'U\'LU\'L\'ULU\'L\'UUl").
-top(l,t,r,l,t,t,l,f,r,Acc):-	Acc<4, 
-				write("rUR\'URU\'R\'URUUr\'").
-top(l,t,b,l,t,t,l,f,f,Acc):-	Acc<4, 
-				write("R\'FR\'F\'RRUUyR\'FRF\'").
-top(b,t,r,t,t,r,f,f,r,Acc):-	Acc<4, 
-				write("R\'FRRB\'RRF\'RRBR\'").
+top(l,t,b,t,t,r,l,f,f,Acc):-	Acc<4,				write("FRUR\'U\'RUR\'U\'F\'").
+top(b,t,r,l,t,t,f,f,r,Acc):-	Acc<4,				write("F\'L\'U\'LUL\'U\'LUF").
+top(l,t,r,t,t,r,l,f,r,Acc):-	Acc<4,				write("l\'U\'LU\'L\'ULU\'L\'UUl").
+top(l,t,r,l,t,t,l,f,r,Acc):-	Acc<4,				write("rUR\'URU\'R\'URUUr\'").
+top(l,t,b,l,t,t,l,f,f,Acc):-	Acc<4,				write("R\'FR\'F\'RRUUyR\'FRF\'").
+top(b,t,r,t,t,r,f,f,r,Acc):-	Acc<4,				write("R\'FRRB\'RRF\'RRBR\'").
 %F1-F4
-top(l,t,b,t,t,r,f,f,t,Acc):-	Acc<4, 
-				write("RUR\'U\'R\'FRRUR\'U\'F\'").
-top(b,b,t,t,t,r,l,t,f,Acc):-	Acc<4, 
-				write("RUR\'UR\'FRF\'RUUR\'").
-top(t,b,r,l,t,t,f,t,t,Acc):-	Acc<4, 
-				write("RUUR\'R\'FRF\'RUUR\'").
-top(t,t,r,t,t,r,f,f,t,Acc):-	Acc<4, 
-				write("FRU\'R\'U\'RUR\'F\'").
+top(l,t,b,t,t,r,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'R\'FRRUR\'U\'F\'").
+top(b,b,t,t,t,r,l,t,f,Acc):-	Acc<4,				write("RUR\'UR\'FRF\'RUUR\'").
+top(t,b,r,l,t,t,f,t,t,Acc):-	Acc<4,				write("RUUR\'R\'FRF\'RUUR\'").
+top(t,t,r,t,t,r,f,f,t,Acc):-	Acc<4,				write("FRU\'R\'U\'RUR\'F\'").
 %A1-A4
-top(t,b,t,l,t,t,l,t,r,Acc):-	Acc<4, 
-				write("RRUR\'B\'RU\'RRURBR\'").
-top(b,t,t,t,t,r,f,f,t,Acc):-	Acc<4, 
-				write("RUR\'U\'RU\'R\'F\'U\'FRUR\'").
-top(b,t,b,t,t,r,t,f,t,Acc):-	Acc<4, 
-				write("RUR\'URUUR\'FRUR\'U\'F\'").
-top(l,t,t,t,t,r,l,f,t,Acc):-	Acc<4, 
-				write("R\'UURUR\'URyFRUR\'U\'F\'").
+top(t,b,t,l,t,t,l,t,r,Acc):-	Acc<4,				write("RRUR\'B\'RU\'RRURBR\'").
+top(b,t,t,t,t,r,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'RU\'R\'F\'U\'FRUR\'").
+top(b,t,b,t,t,r,t,f,t,Acc):-	Acc<4,				write("RUR\'URUUR\'FRUR\'U\'F\'").
+top(l,t,t,t,t,r,l,f,t,Acc):-	Acc<4,				write("R\'UURUR\'URyFRUR\'U\'F\'").
 %L1-L6
-top(b,t,r,t,t,r,t,f,f,Acc):-	Acc<4, 
-				write("rUR\'URUUr\'").
-top(t,b,b,t,t,r,f,t,r,Acc):-	Acc<4, 
-				write("r\'U\'RU\'R\'UUr").
-top(t,b,r,t,t,r,l,t,f,Acc):-	Acc<4, 
-				write("RB\'R\'U\'RUBU\'R\'").
-top(l,b,t,l,t,t,f,t,r,Acc):-	Acc<4, 
-				write("FRUR\'U\'F\'UFRUR\'U\'F\'").
-top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4, 
-				write("FRUR\'U\'F\'").
-top(t,b,b,t,t,t,l,f,t,Acc):-	Acc<4, 
-				write("R\'FRUR\'U\'F\'UR").
+top(b,t,r,t,t,r,t,f,f,Acc):-	Acc<4,				write("rUR\'URUUr\'").
+top(t,b,b,t,t,r,f,t,r,Acc):-	Acc<4,				write("r\'U\'RU\'R\'UUr").
+top(t,b,r,t,t,r,l,t,f,Acc):-	Acc<4,				write("RB\'R\'U\'RUBU\'R\'").
+top(l,b,t,l,t,t,f,t,r,Acc):-	Acc<4,				write("FRUR\'U\'F\'UFRUR\'U\'F\'").
+top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,				write("FRUR\'U\'F\'").
+top(t,b,b,t,t,t,l,f,t,Acc):-	Acc<4,				write("R\'FRUR\'U\'F\'UR").
 %T1-T2
-top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4, 
-				write("FRUR\'U\'F\'").
-top(b,b,t,t,t,t,f,f,t,Acc):-	Acc<4, 
-				write("RUR\'U\'R\'FRF\'").
+top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,				write("FRUR\'U\'F\'").
+top(b,b,t,t,t,t,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'R\'FRF\'").
 &C1-C2
-top(t,t,r,l,t,r,t,t,r,Acc):-	Acc<4, 
-				write("R\'U\'R\'FRF\'UR").
-top(l,b,r,t,t,t,t,f,t,Acc):-	Acc<4, 
-				write("RURRU\'R\'FRURU\'F\'").
+top(t,t,r,l,t,r,t,t,r,Acc):-	Acc<4,				write("R\'U\'R\'FRF\'UR").
+top(l,b,r,t,t,t,t,f,t,Acc):-	Acc<4,				write("RURRU\'R\'FRURU\'F\'").
 &I1-I4
-top(l,t,r,l,t,r,l,t,r,Acc):-	Acc<4, 
-				write("R\'UURRUR\'URUUx\'U\'R\'U").
-top(b,t,r,l,t,r,f,t,r,Acc):-	Acc<4, 
-				write("RUR\'URd\'RU\'R\'F\'").
-top(l,b,r,t,t,t,l,f,r,Acc):-	Acc<4, 
-				write("FRUR\'U\'RF\'rUR\'U\'r\'").
-top(l,b,b,t,t,t,l,f,f,Acc):-	Acc<4, 
-				write("fRUR\'U\'RUR\'U\'f\'").
+top(l,t,r,l,t,r,l,t,r,Acc):-	Acc<4,				write("R\'UURRUR\'URUUx\'U\'R\'U").
+top(b,t,r,l,t,r,f,t,r,Acc):-	Acc<4,				write("RUR\'URd\'RU\'R\'F\'").
+top(l,b,r,t,t,t,l,f,r,Acc):-	Acc<4,				write("FRUR\'U\'RF\'rUR\'U\'r\'").
+top(l,b,b,t,t,t,l,f,f,Acc):-	Acc<4,				write("fRUR\'U\'RUR\'U\'f\'").
 %K1-K4
-top(l,b,t,t,t,t,f,f,r,Acc):-	Acc<4, 
-				write("rUr\'RUR\'U\'rU\'r\'").
+top(l,b,t,t,t,t,f,f,r,Acc):-	Acc<4,				write("rUr\'RUR\'U\'rU\'r\'").
 top(t,b,r,t,t,t,l,f,f,Acc):-	Acc<4,				write("l\'U\'lL\'U\'LUl\'Ul").
 top(b,b,r,t,t,t,t,f,f,Acc):-	Acc<4,				write("FURU\'RRF\'RURU\'R\'").
 top(l,b,b,t,t,t,f,f,t,Acc):-	Acc<4,				write("R\'FRUR\'F\'Ry\'RU\'R\'").
@@ -258,20 +287,18 @@ top(t,b,b,l,t,r,l,f,t,Acc):-	Acc<4,				write("RUR\'UR\'FRF\'UUR\'FRF\'").
 top(t,b,t,l,t,r,t,f,t,Acc):-	Acc<4,				write("MURUR\'U\'MMURU\'r\'").
 
 
-
-
 top(A,B,C,D,E,F,G,H,I,Acc):-	Acc1 is Acc+1,
-				Acc1 < 4,
-				girar(A,A2),
-				girar(B,B2),
-				girar(C,C2),
-				girar(D,D2),
-				girar(F,F2),
-				girar(G,G2),
-				girar(H,H2),
-				girar(I,I2),
-				write("U+"),
-				top(G2,D2,A2,H2,E,B2,I2,F2,C2,Acc1).
+								Acc1 < 4,
+								girar_U(A,A2),
+								girar_U(B,B2),
+								girar_U(C,C2),
+								girar_U(D,D2),
+								girar_U(F,F2),
+								girar_U(G,G2),
+								girar_U(H,H2),
+								girar_U(I,I2),
+								write("U+"),
+								top(G2,D2,A2,H2,E,B2,I2,F2,C2,Acc1).
 
 
 
