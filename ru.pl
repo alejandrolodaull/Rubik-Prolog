@@ -1,3 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	FUNCIONES PRINCIPALES																			%
+%																									%
+%	- e(A,B,C,D).	-> Coloca la esquina y el piso superior una vez formada la cruz blanca -> F2L	%
+%   ⤷	A = cara de la esquina blanca a colocar	(pegatina blanca)									%
+%   ⤷	B = posición de la esquina blanca a colocar (pegatina blanca)								%
+%   ⤷	C = cara de la arista frontal																%
+%	⤷	D = posicion de la arista frontal															%
+%																									%
+%	- top(A,B,C,D,E,F,G,H,I).	-> Forma la cara amarilla	-> OLL									%
+%	⤷	A-I = cara de la pegatina amarilla correspondiente											%
+%																									%
+%	- end(A,B,C,D,E,F,G,H,I,J,K,L). -> Ordena el lateral de la cara amarilla -> PLL					%
+%	⤷	A-L = color de los laterales																%
+%																									%
+%																									%
+%		┌─── ─── ───┐                b➘        	                                  					%
+%		│ 1 │ 2 │ 3 │                ────        	                              					%
+%		 ───┼───┼───                ╱ t ╱│         	                                                %
+%		│ 4 │ 5 │ 6 │              ┌───┐r│        	                                                %
+%		 ───┼───┼───             l➙│ f │╱                                                           %
+%		│ 7 │ 8 │ 9 │              └───┘                                                            %
+%		└─── ─── ───┘               d➚                                                              %
+%																									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+:- discontiguous esquina/6.
+:- style_check(-singleton).
+
 % e(""). esquina(,L,Acc):-e(L).
 
 e1("URU\'R\'").
@@ -112,13 +143,15 @@ esquina(C,N,D,M,L,Acc):-
 writes([A|B]):-write(A),write(' '),writes(B).
 writes([A|[]]):-write(A).
 
-esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
+% esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
 %esquima izq
-blanca_esquina(f,7,C,D,A,B,E,F):-write('L\'UUL+'),
-girar_L(f,7,A1,B1), girar_L(A1,B1,A2,B2), girar_L(A2,B2,A3,B3), girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
-girar_L(C,D,C1,D1), girar_L(C1,D1,C2,D2), girar_L(C2,D2,C3,D3), girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F),
-writes([A1,B1,A2,B2,A3,B3,A4,B4,A5,B5,A,B]).
+%blanca_esquina(f,7,C,D,A,B,E,F):-write('L\'UUL+'),
+%girar_L(f,7,A1,B1), girar_L(A1,B1,A2,B2), girar_L(A2,B2,A3,B3), girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
+%girar_L(C,D,C1,D1), girar_L(C1,D1,C2,D2), girar_L(C2,D2,C3,D3), girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F),
+%writes([A1,B1,A2,B2,A3,B3,A4,B4,A5,B5,A,B]).
 
+%LLL UU 
+%No L
 
 
 %
@@ -155,6 +188,7 @@ girar_U(b,X,A,B):-A=r,B=X.
 girar_U(r,X,A,B):-X\==4,A=f,B=X.
 
 %%%%%%UUUUU%%%%%%%
+girar_U(u,B,C,D):- C=u,girar(B,D).
 girar_U(A,B,C,D):-girar_U(A,C),girar(B,D).
 girar_U(t,A):- A=t.
 girar_U(d,A):- A=d.
@@ -172,6 +206,7 @@ girar_U(7,B):- B=1.
 girar_U(8,B):- B=4.
 girar_U(9,B):- B=7.
 
+girar_D(d,B,C,D):- C=d,girar(B,D).
 girar_D(A,B,C,D):-girar_D(A,C),girar(B,D).
 girar_D(d,A):- A=d.
 girar_D(t,A):- A=t.
@@ -180,6 +215,7 @@ girar_D(r,A):- A=b.
 girar_D(b,A):- A=l.
 girar_D(l,A):- A=f.
 
+girar_F(f,B,C,D):- C=f,girar(B,D).
 girar_F(A,B,C,D):-girar_F(A,C),girar(B,D).
 girar_F(f,A):- A=f.
 girar_F(b,A):- A=b.
@@ -188,6 +224,7 @@ girar_F(r,A):- A=d.
 girar_F(d,A):- A=l.
 girar_F(l,A):- A=t.
 
+girar_B(b,B,C,D):- C=b,girar(B,D).
 girar_B(A,B,C,D):-girar_B(A,C),girar(B,D).
 girar_B(b,A):- A=b.
 girar_B(f,A):- A=f.
@@ -196,6 +233,7 @@ girar_B(l,A):- A=d.
 girar_B(d,A):- A=r.
 girar_B(r,A):- A=t.
 
+girar_R(r,B,C,D):- C=r,girar(B,D).
 girar_R(A,B,C,D):-girar_R(A,C),girar(B,D).
 girar_R(r,A):- A=r.
 girar_R(l,A):- A=l.
@@ -204,6 +242,7 @@ girar_R(b,A):- A=d.
 girar_R(d,A):- A=f.
 girar_R(f,A):- A=t.
 
+girar_L(l,B,C,D):- C=l,girar(B,D).
 girar_L(A,B,C,D):-girar_L(A,C),girar(B,D).
 girar_L(l,A):- A=l.
 girar_L(r,A):- A=r.
@@ -276,10 +315,10 @@ top(t,b,b,t,t,t,l,f,t,Acc):-	Acc<4,				write("R\'FRUR\'U\'F\'UR").
 %T1-T2
 top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,				write("FRUR\'U\'F\'").
 top(b,b,t,t,t,t,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'R\'FRF\'").
-&C1-C2
+% C1-C2
 top(t,t,r,l,t,r,t,t,r,Acc):-	Acc<4,				write("R\'U\'R\'FRF\'UR").
 top(l,b,r,t,t,t,t,f,t,Acc):-	Acc<4,				write("RURRU\'R\'FRURU\'F\'").
-&I1-I4
+% I1-I4
 top(l,t,r,l,t,r,l,t,r,Acc):-	Acc<4,				write("R\'UURRUR\'URUUx\'U\'R\'U").
 top(b,t,r,l,t,r,f,t,r,Acc):-	Acc<4,				write("RUR\'URd\'RU\'R\'F\'").
 top(l,b,r,t,t,t,l,f,r,Acc):-	Acc<4,				write("FRUR\'U\'RF\'rUR\'U\'r\'").
@@ -314,10 +353,35 @@ top(A,B,C,D,E,F,G,H,I,Acc):-	Acc1 is Acc+1,
 								top(G2,D2,A2,H2,E,B2,I2,F2,C2,Acc1).
 
 
+end(A,B,C,D,E,F,G,H,I,J,K,L):-end(A,B,C,D,E,F,G,H,I,J,K,L,0).
+end(V,R,V,N,V,N,A,A,A,R,N,R,Acc):- Acc<4, write("RRURUR'U'R'U'R'UR'").
+end(V,N,V,N,V,N,A,R,A,R,N,R,Acc):- Acc<4, write("MMUMMUM'UUMMUUM'UU").
+end(R,R,N,A,V,R,V,N,V,N,A,A,Acc):- Acc<4, write("xR'uR'D2RU'R'D2R2").
+end(A,R,V,N,V,R,V,N,A,R,A,N,Acc):- Acc<4, write("X' R U' R' D R U R'u2 R' U R D R' U' R").
+end(V,N,V,N,R,N,A,A,A,R,V,R,Acc):- Acc<4, write("R U' R U R UR U' R' U' R2").
+end(R,N,R,V,A,V,N,R,N,A,V,A,Acc):- Acc<4, write("M2 U M2 U2 M2 U M2").
+end(N,V,N,A,N,R,V,A,A,R,R,V,Acc):- Acc<4, write("x' R U' R D2R' U R D2 R2").
+end(R,R,R,V,V,V,N,N,N,A,A,A,Acc):- Acc<4, write("Solved").
 
+end(R,A,R,V,V,N,A,N,V,N,R,A,Acc):- Acc<4, write("L U2' L' U2' L F'L' U' L U L F L2' U").
+end(V,V,V,N,N,A,R,R,N,A,A,R,Acc):- Acc<4, write("R' U L' U2 R U' R' U2 R L U'").
+end(R,R,V,N,A,R,V,N,N,A,V,A,Acc):- Acc<4, write("R U R' U' R' FR2 U' R' U' R U R' F'").
+end(R,V,R,V,R,N,A,N,V,N,A,A,Acc):- Acc<4, write("R' U2 R U2 R' FR U R' U' R' F' R2 U'").
+end(R,V,V,N,R,R,V,N,N,A,A,A,Acc):- Acc<4, write("R U R' F' {R U R' U'R' F R2 U' R' U'}").
+end(A,N,V,N,V,A,R,R,R,V,A,N,Acc):- Acc<4, write("R' U2 R' d' R' F'R2 U' R' U R' F R U' F").
 
+end(R,R,N,A,N,V,N,V,R,V,A,A,Acc):- Acc<4, write("R' U R' d' R' F'R2 U' R' U R' F R F").
+end(A,V,V,N,R,R,V,A,A,R,N,N,Acc):- Acc<4, write("{L U' R U2 L' U R'}{L U' R U2 L' U R'} U").
+end(R,R,N,A,V,V,N,A,R,V,N,A,Acc):- Acc<4, write("F R U' R' U' R U R' F'{R U R' U' R' F R F'}").
+end(A,A,V,N,N,R,V,V,A,R,R,N,Acc):- Acc<4, write("{R' U L' U2 R U' L}{R' U L' U2 R U' L} U'").
 
+end(A,R,R,V,N,A,R,A,V,N,V,N,Acc):- Acc<4, write("R2 u R' U R' U' Ru' R2 y' R' U R").
+end(A,N,R,V,V,A,R,A,V,N,R,N,Acc):- Acc<4, write("R U R' y' R2 u'R U' R' U R' u R2").
+end(A,V,R,V,N,A,R,R,V,N,A,N,Acc):- Acc<4, write("R2 u' R U' R U R'u R2 y R U' R'").
+end(A,V,R,V,A,A,R,N,V,N,R,N,Acc):- Acc<4, write("R' U' R y R2 u R'U R U' R u' R2").
 
+end(A,B,C,D,E,F,G,H,I,J,K,L,Acc):- Acc<3, Acc1 is Acc+1, write("U+"),end(J,K,L,A,B,C,D,E,F,G,H,I,Acc1).
 
+%% https://ruwix.com/widget/notation/
 
 
