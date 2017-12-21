@@ -1,130 +1,132 @@
+help:-write("
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	FUNCIONES PRINCIPALES																			%
-%																									%
-%	- e(A,B,C,D).	-> Coloca la esquina y el piso superior una vez formada la cruz blanca -> F2L	%
-%   ⤷	A = cara de la esquina blanca a colocar	(pegatina blanca)									%
-%   ⤷	B = posición de la esquina blanca a colocar (pegatina blanca)								%
-%   ⤷	C = cara de la arista frontal																%
-%	⤷	D = posicion de la arista frontal															%
-%																									%
-%	- top(A,B,C,D,E,F,G,H,I).	-> Forma la cara amarilla	-> OLL									%
-%	⤷	A-I = cara de la pegatina amarilla correspondiente											%
-%																									%
-%	- end(A,B,C,D,E,F,G,H,I,J,K,L). -> Ordena el lateral de la cara amarilla -> PLL					%
-%	⤷	A-L = color de los laterales																%
-%																									%
-%                                                      ╱   ╱   ╱   ╱    ╱   ╱ X ╱   ╱               %
-%       ┌─── ─── ───┐                b➘               ┌─── ─── ───┐    ┌─── ─── ───┐                %
-%       │ 1 │ 2 │ 3 │                ────        Ej.: │   │   │   │╱   │   │   │   │╱               %
-%        ───┼───┼───                ╱ t ╱│             ───┼───┼───      ───┼───┼───                 %
-%       │ 4 │ 5 │ 6 │              ┌───┐r│            │ X │   │   │╱   │   │   │   │╱               %
-%        ───┼───┼───             l➙│ f │╱              ───┼───┼───      ───┼───┼───                 %
-%       │ 7 │ 8 │ 9 │              └───┘              │   │   │   │╱   │   │   │   │╱               %
-%       └─── ─── ───┘               d➚                └─── ─── ───┘    └─── ─── ───┘                %
-%                                                         = f,4            = t,8                    %
-%																									%
-%		Movimientos:  https://ruwix.com/widget/notation/											%
+%\x1B[1m\x1B[34m       FUNCIONES PRINCIPALES                                                                    	\x1B[0m%
+%                                                                                                	%
+%   - \x1B[33me(A,B,C,D).\x1B[0m   -> Coloca la esquina y el piso superior una vez formada la cruz blanca -> F2L	%
+%   ⤷       A = cara de la esquina blanca a colocar (pegatina blanca)                            	%
+%   ⤷       B = posición de la esquina blanca a colocar (pegatina blanca)                        	%
+%   ⤷       C = cara de la arista frontal                                                        	%
+%   ⤷       D = posicion de la arista frontal                                                    	%
+%                                                                                                	%
+%   - \x1B[33mtop(A,B,C,D,E,F,G,H,I).\x1B[0m   -> Forma la cara amarilla   -> OLL                               	%
+%   ⤷       A-I = cara de la pegatina amarilla correspondiente                                   	%
+%                                                                                                	%
+%   - \x1B[33mend(A,B,C,D,E,F,G,H,I,J,K,L).\x1B[0m -> Ordena el lateral de la cara amarilla -> PLL              	%
+%   ⤷       A-L = color de los laterales                                                         	%
+%                                                                                                	%
+%                                                      ╱   ╱   ╱   ╱    ╱   ╱ X ╱   ╱            	%
+%       ┌─── ─── ───┐                b➘               ┌─── ─── ───┐    ┌─── ─── ───┐             	%
+%       │ 1 │ 2 │ 3 │                ────        Ej.: │   │   │   │╱   │   │   │   │╱            	%
+%        ───┼───┼───                ╱ t ╱│             ───┼───┼───      ───┼───┼───              	%
+%       │ 4 │ 5 │ 6 │              ┌───┐r│            │ X │   │   │╱   │   │   │   │╱            	%
+%        ───┼───┼───             l➙│ f │╱              ───┼───┼───      ───┼───┼───              	%
+%       │ 7 │ 8 │ 9 │              └───┘              │   │   │   │╱   │   │   │   │╱            	%
+%       └─── ─── ───┘               d➚                └─── ─── ───┘    └─── ─── ───┘             	%
+%                                                         = f,4            = t,8                 	%
+%                                                                                                	%
+%       Movimientos:  https://ruwix.com/widget/notation/                                         	%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+").
 
 
 
 :- discontiguous esquina/6.
 :- style_check(-singleton).
 
-% e(""). esquina(,L,Acc):-e(L).
+% e(""). esquina(,L,Acc):-accW(Acc), e(L).
 
 e1("URU\'R\'").
-esquina(f,3,t,6,L,Acc):-e1(L).
+esquina(f,3,t,6,L,Acc):-accW(Acc), e1(L).
 e2("y\'U\'R\'UR").
-esquina(r,1,f,2,L,Acc):-e2(L).
+esquina(r,1,f,2,L,Acc):-accW(Acc), e2(L).
 e3("y\'R\'U\'R").
-esquina(f,3,l,2,L,Acc):-e3(L).
+esquina(f,3,l,2,L,Acc):-accW(Acc), e3(L).
 e4("RUR\'").
 
-esquina(r,1,t,2,L,Acc):-e4(L).
+esquina(r,1,t,2,L,Acc):-accW(Acc), e4(L).
 e5("U\'RUR\'U2RU\'R\'").
-esquina(f,3,t,2,L,Acc):-e5(L).
+esquina(f,3,t,2,L,Acc):-accW(Acc), e5(L).
 e6("dR\'U\'RUUR\'UR").
-esquina(r,1,l,2,L,Acc):-e6(L).
+esquina(r,1,l,2,L,Acc):-accW(Acc), e6(L).
 e7("U\'RUUR\'UURU\'R\'").
-esquina(f,3,t,4,L,Acc):-e7(L).
+esquina(f,3,t,4,L,Acc):-accW(Acc), e7(L).
 e8("dR\'UURUUR\'UR").
-esquina(r,1,b,2,L,Acc):-e8(L).
+esquina(r,1,b,2,L,Acc):-accW(Acc), e8(L).
 
 e9("R\'U\'RU\'R\'U\'R").
-esquina(f,3,b,2,L,Acc):-e9(L).
+esquina(f,3,b,2,L,Acc):-accW(Acc), e9(L).
 e10("U\'RUR\'URUR\'").
-esquina(r,1,t,4,L,Acc):-e10(L).
+esquina(r,1,t,4,L,Acc):-accW(Acc), e10(L).
 e11("U\'RUUR\'dR'U'R").
-esquina(f,3,r,2,L,Acc):-e11(L).
+esquina(f,3,r,2,L,Acc):-accW(Acc), e11(L).
 e12("dR\'UURd\'RUR\'").
-esquina(r,1,t,8,L,Acc):-e12(L).
+esquina(r,1,t,8,L,Acc):-accW(Acc), e12(L).
 e13("dR\'URU\'R\'U\'R").
-esquina(f,3,f,2,L,Acc):-e13(L).
+esquina(f,3,f,2,L,Acc):-accW(Acc), e13(L).
 e14("U\'RU\'R\'URUR\'").
-esquina(r,1,t,4,L,Acc):-e14(L).
+esquina(r,1,t,6,L,Acc):-accW(Acc), e14(L).
 
 e15("y\'R\'URU\'d\'RUR\'").
-esquina(f,3,t,8,L,Acc):-e15(L).
+esquina(f,3,t,8,L,Acc):-accW(Acc), e15(L).
 e16("RU\'R\'dR\'U\'R").
-esquina(r,1,r,2,L,Acc):-e16(L).
+esquina(r,1,r,2,L,Acc):-accW(Acc), e16(L).
 e17("RUUR\'U\'RUR\'").
-esquina(t,9,t,6,L,Acc):-e17(L).
+esquina(t,9,t,6,L,Acc):-accW(Acc), e17(L).
 e18("y\'R\'UURUR\'U\'R").
-esquina(t,9,f,2,L,Acc):-e18(L).
+esquina(t,9,f,2,L,Acc):-accW(Acc), e18(L).
 
 e19("URUUR\'URU\'R\'").
-esquina(t,9,t,2,L,Acc):-e19(L).
+esquina(t,9,t,2,L,Acc):-accW(Acc), e19(L).
 e20("y\'U\'R\'UURU\'R\'UR").
-esquina(t,9,l,2,L,Acc):-e20(L).
+esquina(t,9,l,2,L,Acc):-accW(Acc), e20(L).
 e21("UURUR\'URU\'R\'").
-esquina(t,9,t,4,L,Acc):-e21(L).
+esquina(t,9,t,4,L,Acc):-accW(Acc), e21(L).
 e22("y\'UUR\'U\'RU\'R\'UR").
-esquina(t,9,b,2,L,Acc):-e22(L).
+esquina(t,9,b,2,L,Acc):-accW(Acc), e22(L).
 
 e23("RUR\'U\'U\'RUR\'U\'RUR\'").
-esquina(t,9,t,8,L,Acc):-e23(L).
+esquina(t,9,t,8,L,Acc):-accW(Acc), e23(L).
 e24("y\'R\'U\'RUUR\'U\'RUR\'U\'R").
-esquina(t,9,r,2,L,Acc):-e24(L).
+esquina(t,9,r,2,L,Acc):-accW(Acc), e24(L).
 
 e25("d\'L\'ULdRU\'R\'"). 
-esquina(b,3,t,6,L,Acc):-e25(L).
+esquina(b,3,t,6,L,Acc):-accW(Acc), e25(L).
 e26("URU\'R\'d\'L\'UL"). 
-esquina(b,3,f,2,L,Acc):-e26(L).
+esquina(b,3,f,2,L,Acc):-accW(Acc), e26(L).
 e27("RU\'R\'URU\'R\'"). 
-esquina(f,9,f,2,L,Acc):-e27(L).
+esquina(f,9,f,2,L,Acc):-accW(Acc), e27(L).
 e28("y\'R\'URU\'R\'UR"). 
-esquina(r,7,f,2,L,Acc):-e28(L).
+esquina(r,7,f,2,L,Acc):-accW(Acc), e28(L).
 e29("y\'R\'U\'RUR\'U\'R"). 
-esquina(f,9,f,2,L,Acc):-e2(L).
+esquina(f,9,f,2,L,Acc):-accW(Acc), e2(L).
 e30("RUR\'U\'RUR\'"). 
-esquina(r,7,t,6,L,Acc):-e30(L).
+esquina(r,7,t,6,L,Acc):-accW(Acc), e30(L).
 
 e31("RU\'R\'dR\'UR"). 
-esquina(t,9,r,4,L,Acc):-e31(L).
+esquina(t,9,r,4,L,Acc):-accW(Acc), e31(L).
 e32("RUR\'U\'RUR\'U\'RUR\'"). 
-esquina(t,9,f,6,L,Acc):-e32(L).
+esquina(t,9,f,6,L,Acc):-accW(Acc), e32(L).
 e33("U\'RU\'R\'UURU\'R\'"). 
-esquina(f,3,f,6,L,Acc):-e33(L).
+esquina(f,3,f,6,L,Acc):-accW(Acc), e33(L).
 e34("U\'RUUR\'URUR\'"). 
-esquina(r,1,f,6,L,Acc):-e34(L).
+esquina(r,1,f,6,L,Acc):-accW(Acc), e34(L).
 e35("U\'RUR\'dR\'U\'R"). 
-esquina(f,3,r,4,L,Acc):-e35(L).
+esquina(f,3,r,4,L,Acc):-accW(Acc), e35(L).
 e36("dR\'U\'Rd\'RUR\'"). 
-esquina(r,1,r,4,L,Acc):-e36(L).
+esquina(r,1,r,4,L,Acc):-accW(Acc), e36(L).
 
 e37("Solved Pair"). 
-esquina(d,3,f,6,L,Acc):-e37(L).
+esquina(d,3,f,6,L,Acc):-accW(Acc), e37(L).
 e38("RU\'R\'dR\'UURUUR\'UR"). 
-esquina(d,3,r,4,L,Acc):-e38(L).
+esquina(d,3,r,4,L,Acc):-accW(Acc), e38(L).
 e39("RU\'R\'U\'RUR\'UURU\'R\'"). 
-esquina(f,9,f,6,L,Acc):-e39(L).
+esquina(f,9,f,6,L,Acc):-accW(Acc), e39(L).
 e40("RU\'R\'URUUR\'URU\'R\'"). 
-esquina(r,7,f,6,L,Acc):-e40(L).
+esquina(r,7,f,6,L,Acc):-accW(Acc), e40(L).
 e41("RU\'R\'dR\'U\'RU\'R\'U\'R"). 
-esquina(f,9,r,4,L,Acc):-e41(L).
+esquina(f,9,r,4,L,Acc):-accW(Acc), e41(L).
 e42("RU\'R\'ddyR\'U\'RU\'R\'UR"). 
-esquina(r,7,r,4,L,Acc):-e42(L).
+esquina(r,7,r,4,L,Acc):-accW(Acc), e42(L).
 
 
 e(A,B,C,D):-esquina(A,B,C,D).
@@ -132,18 +134,22 @@ esquina(A,B,C,D):-esquina(A,B,C,D,L),write(L).
 esquina(C,N,D,M,L):-esquina(C,N,D,M,L,0).
 
 esquina(C,N,D,M,L,Acc):-
-				Acc<3,
+    			Acc<3,
 				girar_U(C,N,C1,N1),
 				girar_U(D,M,D1,M1),
-				write('U+'),
+				%write('U+'),
 				Acc1 is Acc+1,
 				esquina(C1,N1,D1,M1,L,Acc1).
 
 
+accW(0).
+accW(1):- write("U+").
+accW(2):- write("U2+").
+accW(3):- write("U'+").
 
 
-writes([A|B]):-write(A),write(' '),writes(B).
-writes([A|[]]):-write(A).
+%writes([A|B]):-write(A),write(' '),writes(B).
+%writes([A|[]]):-write(A).
 
 % esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
 %esquima izq
@@ -190,8 +196,8 @@ girar_U(b,X,A,B):-A=r,B=X.
 girar_U(r,X,A,B):-X\==4,A=f,B=X.
 
 %%%%%%UUUUU%%%%%%%
-girar_U(u,B,C,D):- C=u,girar(B,D).
-girar_U(A,B,C,D):-girar_U(A,C),girar(B,D).
+%girar_U(u,B,C,D):- C=u,girar(B,D).
+%girar_U(A,B,C,D):-girar_U(A,C),girar(B,D).
 girar_U(t,A):- A=t.
 girar_U(d,A):- A=d.
 girar_U(b,A):- A=r.
@@ -268,77 +274,77 @@ girar(9,B):- B=7.
 
 top(A,B,C,D,E,F,G,H,I):-top(A,B,C,D,E,F,G,H,I,0).
 
-top(b,t,r,t,t,t,t,t,f,Acc):-	Acc<4,				write("RUR\'URUUR\'").
-top(b,t,t,t,t,t,f,t,r,Acc):-	Acc<4,				write("RUUR\'U\'RU\'R\'").
-top(l,t,b,t,t,t,l,t,f,Acc):-	Acc<4,				write("fRUR\'U\'f\'FRUR\'U\'F\'").
-top(b,t,b,t,t,t,f,t,f,Acc):-	Acc<4,				write("FRUR\'U\'RUR\'U\'RUR\'U\'F\'").
-top(b,t,t,t,t,t,f,t,t,Acc):-	Acc<4,				write("rUR\'U\'r\'FRF\'").
-top(l,t,t,t,t,t,t,t,f,Acc):-	Acc<4,				write("F\'rUR\'U\'r\'FR").
-top(t,t,t,t,t,t,f,t,f,Acc):-	Acc<4,				write("RRDR\'UURD\'R\'UUR\'").
-top(t,t,t,t,t,t,t,t,t,Acc):-	Acc<4,				write("Solved").
+top(b,t,r,t,t,t,t,t,f,Acc):-	Acc<4,		accW(Acc),		write("RUR\'URUUR\'").
+top(b,t,t,t,t,t,f,t,r,Acc):-	Acc<4,		accW(Acc),		write("RUUR\'U\'RU\'R\'").
+top(l,t,b,t,t,t,l,t,f,Acc):-	Acc<4,		accW(Acc),		write("fRUR\'U\'f\'FRUR\'U\'F\'").
+top(b,t,b,t,t,t,f,t,f,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'RUR\'U\'RUR\'U\'F\'").
+top(b,t,t,t,t,t,f,t,t,Acc):-	Acc<4,		accW(Acc),		write("rUR\'U\'r\'FRF\'").
+top(l,t,t,t,t,t,t,t,f,Acc):-	Acc<4,		accW(Acc),		write("F\'rUR\'U\'r\'FR").
+top(t,t,t,t,t,t,f,t,f,Acc):-	Acc<4,		accW(Acc),		write("RRDR\'UURD\'R\'UUR\'").
+top(t,t,t,t,t,t,t,t,t,Acc):-	Acc<4,		accW(Acc),		write("Solved").
 %E1-E2
-top(t,b,t,t,t,t,t,f,t,Acc):-	Acc<4,				write("RUR\'U\'M\'URU\'r\'").
-top(t,b,t,l,t,t,t,t,t,Acc):-	Acc<4,				write("M\'UMUUM\'UM").
+top(t,b,t,t,t,t,t,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'U\'M\'URU\'r\'").
+top(t,b,t,l,t,t,t,t,t,Acc):-	Acc<4,		accW(Acc),		write("M\'UMUUM\'UM").
 %P1-P4
-top(l,b,t,l,t,t,l,t,t,Acc):-	Acc<4,				write("fRUR\'U\'f\'").
-top(t,b,r,t,t,r,t,t,r,Acc):-	Acc<4,				write("f\'L\'U\'LUf").
-top(b,b,t,l,t,t,f,t,t,Acc):-	Acc<4,				write("RUB\'U\'R\'URBR\'").
-top(b,t,t,l,t,t,f,f,t,Acc):-	Acc<4,				write("R\'U\'FURU\'R\'F\'R").
+top(l,b,t,l,t,t,l,t,t,Acc):-	Acc<4,		accW(Acc),		write("fRUR\'U\'f\'").
+top(t,b,r,t,t,r,t,t,r,Acc):-	Acc<4,		accW(Acc),		write("f\'L\'U\'LUf").
+top(b,b,t,l,t,t,f,t,t,Acc):-	Acc<4,		accW(Acc),		write("RUB\'U\'R\'URBR\'").
+top(b,t,t,l,t,t,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("R\'U\'FURU\'R\'F\'R").
 %W1-W2
-top(b,t,t,t,t,r,t,f,r,Acc):-	Acc<4,				write("RUR\'URU\'R\'U\'R\'FRF\'").
-top(t,t,b,l,t,t,l,f,t,Acc):-	Acc<4,				write("L\'U\'LU\'L\'ULULF\'L\'F").
+top(b,t,t,t,t,r,t,f,r,Acc):-	Acc<4,		accW(Acc),		write("RUR\'URU\'R\'U\'R\'FRF\'").
+top(t,t,b,l,t,t,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("L\'U\'LU\'L\'ULULF\'L\'F").
 %S1-S2
-top(l,t,t,l,t,t,f,f,r,Acc):-	Acc<4,				write("rUUR\'U\'RU\'r\'").
-top(b,b,r,l,t,t,l,t,t,Acc):-	Acc<4,				write("r\'UURUR\'Ur").
+top(l,t,t,l,t,t,f,f,r,Acc):-	Acc<4,		accW(Acc),		write("rUUR\'U\'RU\'r\'").
+top(b,b,r,l,t,t,l,t,t,Acc):-	Acc<4,		accW(Acc),		write("r\'UURUR\'Ur").
 %L1-L6
-top(l,t,b,t,t,r,l,f,f,Acc):-	Acc<4,				write("FRUR\'U\'RUR\'U\'F\'").
-top(b,t,r,l,t,t,f,f,r,Acc):-	Acc<4,				write("F\'L\'U\'LUL\'U\'LUF").
-top(l,t,r,t,t,r,l,f,r,Acc):-	Acc<4,				write("l\'U\'LU\'L\'ULU\'L\'UUl").
-top(l,t,r,l,t,t,l,f,r,Acc):-	Acc<4,				write("rUR\'URU\'R\'URUUr\'").
-top(l,t,b,l,t,t,l,f,f,Acc):-	Acc<4,				write("R\'FR\'F\'RRUUyR\'FRF\'").
-top(b,t,r,t,t,r,f,f,r,Acc):-	Acc<4,				write("R\'FRRB\'RRF\'RRBR\'").
+top(l,t,b,t,t,r,l,f,f,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'RUR\'U\'F\'").
+top(b,t,r,l,t,t,f,f,r,Acc):-	Acc<4,		accW(Acc),		write("F\'L\'U\'LUL\'U\'LUF").
+top(l,t,r,t,t,r,l,f,r,Acc):-	Acc<4,		accW(Acc),		write("l\'U\'LU\'L\'ULU\'L\'UUl").
+top(l,t,r,l,t,t,l,f,r,Acc):-	Acc<4,		accW(Acc),		write("rUR\'URU\'R\'URUUr\'").
+top(l,t,b,l,t,t,l,f,f,Acc):-	Acc<4,		accW(Acc),		write("R\'FR\'F\'RRUUyR\'FRF\'").
+top(b,t,r,t,t,r,f,f,r,Acc):-	Acc<4,		accW(Acc),		write("R\'FRRB\'RRF\'RRBR\'").
 %F1-F4
-top(l,t,b,t,t,r,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'R\'FRRUR\'U\'F\'").
-top(b,b,t,t,t,r,l,t,f,Acc):-	Acc<4,				write("RUR\'UR\'FRF\'RUUR\'").
-top(t,b,r,l,t,t,f,t,t,Acc):-	Acc<4,				write("RUUR\'R\'FRF\'RUUR\'").
-top(t,t,r,t,t,r,f,f,t,Acc):-	Acc<4,				write("FRU\'R\'U\'RUR\'F\'").
+top(l,t,b,t,t,r,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'U\'R\'FRRUR\'U\'F\'").
+top(b,b,t,t,t,r,l,t,f,Acc):-	Acc<4,		accW(Acc),		write("RUR\'UR\'FRF\'RUUR\'").
+top(t,b,r,l,t,t,f,t,t,Acc):-	Acc<4,		accW(Acc),		write("RUUR\'R\'FRF\'RUUR\'").
+top(t,t,r,t,t,r,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("FRU\'R\'U\'RUR\'F\'").
 %A1-A4
-top(t,b,t,l,t,t,l,t,r,Acc):-	Acc<4,				write("RRUR\'B\'RU\'RRURBR\'").
-top(b,t,t,t,t,r,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'RU\'R\'F\'U\'FRUR\'").
-top(b,t,b,t,t,r,t,f,t,Acc):-	Acc<4,				write("RUR\'URUUR\'FRUR\'U\'F\'").
-top(l,t,t,t,t,r,l,f,t,Acc):-	Acc<4,				write("R\'UURUR\'URyFRUR\'U\'F\'").
+top(t,b,t,l,t,t,l,t,r,Acc):-	Acc<4,		accW(Acc),		write("RRUR\'B\'RU\'RRURBR\'").
+top(b,t,t,t,t,r,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'U\'RU\'R\'F\'U\'FRUR\'").
+top(b,t,b,t,t,r,t,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'URUUR\'FRUR\'U\'F\'").
+top(l,t,t,t,t,r,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("R\'UURUR\'URyFRUR\'U\'F\'").
 %L1-L6
-top(b,t,r,t,t,r,t,f,f,Acc):-	Acc<4,				write("rUR\'URUUr\'").
-top(t,b,b,t,t,r,f,t,r,Acc):-	Acc<4,				write("r\'U\'RU\'R\'UUr").
-top(t,b,r,t,t,r,l,t,f,Acc):-	Acc<4,				write("RB\'R\'U\'RUBU\'R\'").
-top(l,b,t,l,t,t,f,t,r,Acc):-	Acc<4,				write("FRUR\'U\'F\'UFRUR\'U\'F\'").
-top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,				write("FRUR\'U\'F\'").
-top(t,b,b,t,t,t,l,f,t,Acc):-	Acc<4,				write("R\'FRUR\'U\'F\'UR").
+top(b,t,r,t,t,r,t,f,f,Acc):-	Acc<4,		accW(Acc),		write("rUR\'URUUr\'").
+top(t,b,b,t,t,r,f,t,r,Acc):-	Acc<4,		accW(Acc),		write("r\'U\'RU\'R\'UUr").
+top(t,b,r,t,t,r,l,t,f,Acc):-	Acc<4,		accW(Acc),		write("RB\'R\'U\'RUBU\'R\'").
+top(l,b,t,l,t,t,f,t,r,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'F\'UFRUR\'U\'F\'").
+top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'F\'").
+top(t,b,b,t,t,t,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("R\'FRUR\'U\'F\'UR").
 %T1-T2
-top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,				write("FRUR\'U\'F\'").
-top(b,b,t,t,t,t,f,f,t,Acc):-	Acc<4,				write("RUR\'U\'R\'FRF\'").
+top(l,b,t,t,t,t,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'F\'").
+top(b,b,t,t,t,t,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'U\'R\'FRF\'").
 % C1-C2
-top(t,t,r,l,t,r,t,t,r,Acc):-	Acc<4,				write("R\'U\'R\'FRF\'UR").
-top(l,b,r,t,t,t,t,f,t,Acc):-	Acc<4,				write("RURRU\'R\'FRURU\'F\'").
+top(t,t,r,l,t,r,t,t,r,Acc):-	Acc<4,		accW(Acc),		write("R\'U\'R\'FRF\'UR").
+top(l,b,r,t,t,t,t,f,t,Acc):-	Acc<4,		accW(Acc),		write("RURRU\'R\'FRURU\'F\'").
 % I1-I4
-top(l,t,r,l,t,r,l,t,r,Acc):-	Acc<4,				write("R\'UURRUR\'URUUx\'U\'R\'U").
-top(b,t,r,l,t,r,f,t,r,Acc):-	Acc<4,				write("RUR\'URd\'RU\'R\'F\'").
-top(l,b,r,t,t,t,l,f,r,Acc):-	Acc<4,				write("FRUR\'U\'RF\'rUR\'U\'r\'").
-top(l,b,b,t,t,t,l,f,f,Acc):-	Acc<4,				write("fRUR\'U\'RUR\'U\'f\'").
+top(l,t,r,l,t,r,l,t,r,Acc):-	Acc<4,		accW(Acc),		write("R\'UURRUR\'URUUx\'U\'R\'U").
+top(b,t,r,l,t,r,f,t,r,Acc):-	Acc<4,		accW(Acc),		write("RUR\'URd\'RU\'R\'F\'").
+top(l,b,r,t,t,t,l,f,r,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'RF\'rUR\'U\'r\'").
+top(l,b,b,t,t,t,l,f,f,Acc):-	Acc<4,		accW(Acc),		write("fRUR\'U\'RUR\'U\'f\'").
 %K1-K4
-top(l,b,t,t,t,t,f,f,r,Acc):-	Acc<4,				write("rUr\'RUR\'U\'rU\'r\'").
-top(t,b,r,t,t,t,l,f,f,Acc):-	Acc<4,				write("l\'U\'lL\'U\'LUl\'Ul").
-top(b,b,r,t,t,t,t,f,f,Acc):-	Acc<4,				write("FURU\'RRF\'RURU\'R\'").
-top(l,b,b,t,t,t,f,f,t,Acc):-	Acc<4,				write("R\'FRUR\'F\'Ry\'RU\'R\'").
+top(l,b,t,t,t,t,f,f,r,Acc):-	Acc<4,		accW(Acc),		write("rUr\'RUR\'U\'rU\'r\'").
+top(t,b,r,t,t,t,l,f,f,Acc):-	Acc<4,		accW(Acc),		write("l\'U\'lL\'U\'LUl\'Ul").
+top(b,b,r,t,t,t,t,f,f,Acc):-	Acc<4,		accW(Acc),		write("FURU\'RRF\'RURU\'R\'").
+top(l,b,b,t,t,t,f,f,t,Acc):-	Acc<4,		accW(Acc),		write("R\'FRUR\'F\'Ry\'RU\'R\'").
 %O1-O8
-top(l,b,r,l,t,r,l,f,r,Acc):-	Acc<4,				write("RUUR\'R\'FRF\'UUR\'FRF\'").
-top(l,b,b,l,t,r,l,f,f,Acc):-	Acc<4,				write("FRUR\'U\'F\'fRUR\'U\'f\'").
-top(b,b,r,l,t,r,l,f,t,Acc):-	Acc<4,				write("fRUR\'U\'f\'U\'FRUR\'U\'F\'").
-top(l,b,t,l,t,r,f,f,r,Acc):-	Acc<4,				write("fRUR\'U\'f\'UFRUR\'U\'F\'").
-top(b,b,b,l,t,r,t,f,t,Acc):-	Acc<4,				write("FRUR\'UF\'y\'UUR\'FRF\'").
-top(t,b,t,l,t,r,l,f,r,Acc):-	Acc<4,				write("MURUR\'U\'M\'R\'FRF\'").
-top(t,b,b,l,t,r,l,f,t,Acc):-	Acc<4,				write("RUR\'UR\'FRF\'UUR\'FRF\'").
-top(t,b,t,l,t,r,t,f,t,Acc):-	Acc<4,				write("MURUR\'U\'MMURU\'r\'").
+top(l,b,r,l,t,r,l,f,r,Acc):-	Acc<4,		accW(Acc),		write("RUUR\'R\'FRF\'UUR\'FRF\'").
+top(l,b,b,l,t,r,l,f,f,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'U\'F\'fRUR\'U\'f\'").
+top(b,b,r,l,t,r,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("fRUR\'U\'f\'U\'FRUR\'U\'F\'").
+top(l,b,t,l,t,r,f,f,r,Acc):-	Acc<4,		accW(Acc),		write("fRUR\'U\'f\'UFRUR\'U\'F\'").
+top(b,b,b,l,t,r,t,f,t,Acc):-	Acc<4,		accW(Acc),		write("FRUR\'UF\'y\'UUR\'FRF\'").
+top(t,b,t,l,t,r,l,f,r,Acc):-	Acc<4,		accW(Acc),		write("MURUR\'U\'M\'R\'FRF\'").
+top(t,b,b,l,t,r,l,f,t,Acc):-	Acc<4,		accW(Acc),		write("RUR\'UR\'FRF\'UUR\'FRF\'").
+top(t,b,t,l,t,r,t,f,t,Acc):-	Acc<4,		accW(Acc),		write("MURUR\'U\'MMURU\'r\'").
 
 
 top(A,B,C,D,E,F,G,H,I,Acc):-	Acc1 is Acc+1,
@@ -351,38 +357,41 @@ top(A,B,C,D,E,F,G,H,I,Acc):-	Acc1 is Acc+1,
 								girar_U(G,G2),
 								girar_U(H,H2),
 								girar_U(I,I2),
-								write("U+"),
+								%write("U+"),
 								top(G2,D2,A2,H2,E,B2,I2,F2,C2,Acc1).
 
 
 end(A,B,C,D,E,F,G,H,I,J,K,L):-end(A,B,C,D,E,F,G,H,I,J,K,L,0).
-end(V,R,V,N,V,N,A,A,A,R,N,R,Acc):- Acc<4, write("RRURUR'U'R'U'R'UR'").
-end(V,N,V,N,V,N,A,R,A,R,N,R,Acc):- Acc<4, write("MMUMMUM'UUMMUUM'UU").
-end(R,R,N,A,V,R,V,N,V,N,A,A,Acc):- Acc<4, write("xR'uR'D2RU'R'D2R2").
-end(A,R,V,N,V,R,V,N,A,R,A,N,Acc):- Acc<4, write("X' R U' R' D R U R'u2 R' U R D R' U' R").
-end(V,N,V,N,R,N,A,A,A,R,V,R,Acc):- Acc<4, write("R U' R U R UR U' R' U' R2").
-end(R,N,R,V,A,V,N,R,N,A,V,A,Acc):- Acc<4, write("M2 U M2 U2 M2 U M2").
-end(N,V,N,A,N,R,V,A,A,R,R,V,Acc):- Acc<4, write("x' R U' R D2R' U R D2 R2").
-end(R,R,R,V,V,V,N,N,N,A,A,A,Acc):- Acc<4, write("Solved").
+end(V,R,V,N,V,N,A,A,A,R,N,R,Acc):- Acc<4, accW(Acc), write("RRURUR'U'R'U'R'UR'").
+end(V,N,V,N,V,N,A,R,A,R,N,R,Acc):- Acc<4, accW(Acc), write("MMUMMUM'UUMMUUM'UU").
+end(R,R,N,A,V,R,V,N,V,N,A,A,Acc):- Acc<4, accW(Acc), write("xR'uR'D2RU'R'D2R2").
+end(A,R,V,N,V,R,V,N,A,R,A,N,Acc):- Acc<4, accW(Acc), write("X'RU'R'DRUR'u2R'URDR'U'R").
+end(V,N,V,N,R,N,A,A,A,R,V,R,Acc):- Acc<4, accW(Acc), write("RU'RURURU'R'U'R2").
+end(R,N,R,V,A,V,N,R,N,A,V,A,Acc):- Acc<4, accW(Acc), write("M2UM2U2M2UM2").
+end(N,V,N,A,N,R,V,A,A,R,R,V,Acc):- Acc<4, accW(Acc), write("x'RU'RD2R'URD2R2").
+end(R,R,R,V,V,V,N,N,N,A,A,A,Acc):- Acc<4, accW(Acc), write("Solved").
 
-end(R,A,R,V,V,N,A,N,V,N,R,A,Acc):- Acc<4, write("L U2' L' U2' L F'L' U' L U L F L2' U").
-end(V,V,V,N,N,A,R,R,N,A,A,R,Acc):- Acc<4, write("R' U L' U2 R U' R' U2 R L U'").
-end(R,R,V,N,A,R,V,N,N,A,V,A,Acc):- Acc<4, write("R U R' U' R' FR2 U' R' U' R U R' F'").
-end(R,V,R,V,R,N,A,N,V,N,A,A,Acc):- Acc<4, write("R' U2 R U2 R' FR U R' U' R' F' R2 U'").
-end(R,V,V,N,R,R,V,N,N,A,A,A,Acc):- Acc<4, write("R U R' F' {R U R' U'R' F R2 U' R' U'}").
-end(A,N,V,N,V,A,R,R,R,V,A,N,Acc):- Acc<4, write("R' U2 R' d' R' F'R2 U' R' U R' F R U' F").
+end(R,A,R,V,V,N,A,N,V,N,R,A,Acc):- Acc<4, accW(Acc), write("LU2'L'U2'LF'L'U'LULFL2'U").
+end(V,V,V,N,N,A,R,R,N,A,A,R,Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'R'U2RLU'").
+end(R,R,V,N,A,R,V,N,N,A,V,A,Acc):- Acc<4, accW(Acc), write("RUR'U'R'FR2U'R'U'RUR'F'").
+end(R,V,R,V,R,N,A,N,V,N,A,A,Acc):- Acc<4, accW(Acc), write("R'U2RU2R'FRUR'U'R'F'R2U'").
+end(R,V,V,N,R,R,V,N,N,A,A,A,Acc):- Acc<4, accW(Acc), write("RUR'F'RUR'U'R'FR2U'R'U'").
+end(A,N,V,N,V,A,R,R,R,V,A,N,Acc):- Acc<4, accW(Acc), write("R'U2R'd'R'F'R2U'R'UR'FRU'F").
 
-end(R,R,N,A,N,V,N,V,R,V,A,A,Acc):- Acc<4, write("R' U R' d' R' F'R2 U' R' U R' F R F").
-end(A,V,V,N,R,R,V,A,A,R,N,N,Acc):- Acc<4, write("{L U' R U2 L' U R'}{L U' R U2 L' U R'} U").
-end(R,R,N,A,V,V,N,A,R,V,N,A,Acc):- Acc<4, write("F R U' R' U' R U R' F'{R U R' U' R' F R F'}").
-end(A,A,V,N,N,R,V,V,A,R,R,N,Acc):- Acc<4, write("{R' U L' U2 R U' L}{R' U L' U2 R U' L} U'").
+end(R,R,N,A,N,V,N,V,R,V,A,A,Acc):- Acc<4, accW(Acc), write("R'UR'd'R'F'R2U'R'UR'FRF").
+end(A,V,V,N,R,R,V,A,A,R,N,N,Acc):- Acc<4, accW(Acc), write("LU'RU2L'UR'LU'RU2L'UR'U").
+end(R,R,N,A,V,V,N,A,R,V,N,A,Acc):- Acc<4, accW(Acc), write("FRU'R'U'RUR'F'{RUR'U'R'FRF'").
+end(A,A,V,N,N,R,V,V,A,R,R,N,Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'LR'UL'U2RU'LU'").
 
-end(A,R,R,V,N,A,R,A,V,N,V,N,Acc):- Acc<4, write("R2 u R' U R' U' Ru' R2 y' R' U R").
-end(A,N,R,V,V,A,R,A,V,N,R,N,Acc):- Acc<4, write("R U R' y' R2 u'R U' R' U R' u R2").
-end(A,V,R,V,N,A,R,R,V,N,A,N,Acc):- Acc<4, write("R2 u' R U' R U R'u R2 y R U' R'").
-end(A,V,R,V,A,A,R,N,V,N,R,N,Acc):- Acc<4, write("R' U' R y R2 u R'U R U' R u' R2").
+end(A,R,R,V,N,A,R,A,V,N,V,N,Acc):- Acc<4, accW(Acc), write("R2uR'UR'U'Ru'R2y'R'UR").
+end(A,N,R,V,V,A,R,A,V,N,R,N,Acc):- Acc<4, accW(Acc), write("RUR'y'R2u'RU'R'UR'uR2").
+end(A,V,R,V,N,A,R,R,V,N,A,N,Acc):- Acc<4, accW(Acc), write("R2u'RU'RUR'uR2yRU'R'").
+end(A,V,R,V,A,A,R,N,V,N,R,N,Acc):- Acc<4, accW(Acc), write("R'U'RyR2uR'URU'Ru'R2").
 
-end(A,B,C,D,E,F,G,H,I,J,K,L,Acc):- Acc<3, Acc1 is Acc+1, write("U+"),end(J,K,L,A,B,C,D,E,F,G,H,I,Acc1).
+end(A,B,C,D,E,F,G,H,I,J,K,L,Acc):- 	Acc<3, 
+									Acc1 is Acc+1, 
+									%write("U+"),
+									end(J,K,L,A,B,C,D,E,F,G,H,I,Acc1).
 
 
 
