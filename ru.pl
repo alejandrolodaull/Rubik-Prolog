@@ -362,31 +362,31 @@ top(A,B,C,D,E,F,G,H,I,Acc):-	Acc1 is Acc+1,
 
 
 end(A,B,C,D,E,F,G,H,I,J,K,L):-end(A,B,C,D,E,F,G,H,I,J,K,L,0).
-end(V,R,V,N,V,N,A,A,A,R,N,R,Acc):- Acc<4, accW(Acc), write("RRURUR'U'R'U'R'UR'").
-end(V,N,V,N,V,N,A,R,A,R,N,R,Acc):- Acc<4, accW(Acc), write("MMUMMUM'UUMMUUM'UU").
-end(R,R,N,A,V,R,V,N,V,N,A,A,Acc):- Acc<4, accW(Acc), write("xR'uR'D2RU'R'D2R2").
-end(A,R,V,N,V,R,V,N,A,R,A,N,Acc):- Acc<4, accW(Acc), write("X'RU'R'DRUR'u2R'URDR'U'R").
-end(V,N,V,N,R,N,A,A,A,R,V,R,Acc):- Acc<4, accW(Acc), write("RU'RURURU'R'U'R2").
-end(R,N,R,V,A,V,N,R,N,A,V,A,Acc):- Acc<4, accW(Acc), write("M2UM2U2M2UM2").
-end(N,V,N,A,N,R,V,A,A,R,R,V,Acc):- Acc<4, accW(Acc), write("x'RU'RD2R'URD2R2").
-end(R,R,R,V,V,V,N,N,N,A,A,A,Acc):- Acc<4, accW(Acc), write("Solved").
+end(  V,R,V,  N,V,N,  A,A,A,  R,N,R,  Acc):- Acc<4, accW(Acc), write("RRURUR'U'R'U'R'UR'").
+end(  V,N,V,  N,V,N,  A,R,A,  R,A,R,  Acc):- Acc<4, accW(Acc), write("MMUMMUM'UUMMUUM'UU").
+end(  R,R,N,  A,V,R,  V,N,V,  N,A,A,  Acc):- Acc<4, accW(Acc), write("xR'uR'D2RU'R'D2R2").
+end(  A,R,V,  N,V,R,  V,N,A,  R,A,N,  Acc):- Acc<4, accW(Acc), write("X'RU'R'DRUR'u2R'URDR'U'R").
+end(  V,N,V,  N,R,N,  A,A,A,  R,V,R,  Acc):- Acc<4, accW(Acc), write("RU'RURURU'R'U'R2").
+end(  R,N,R,  V,A,V,  N,R,N,  A,V,A,  Acc):- Acc<4, accW(Acc), write("M2UM2U2M2UM2").
+end(  N,V,N,  A,N,R,  V,A,A,  R,R,V,  Acc):- Acc<4, accW(Acc), write("x'RU'RD2R'URD2R2").
+end(  R,R,R,  V,V,V,  N,N,N,  A,A,A,  Acc):- Acc<4, accW(Acc), write("Solved").
 
-end(R,A,R,V,V,N,A,N,V,N,R,A,Acc):- Acc<4, accW(Acc), write("LU2'L'U2'LF'L'U'LULFL2'U").
-end(V,V,V,N,N,A,R,R,N,A,A,R,Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'R'U2RLU'").
-end(R,R,V,N,A,R,V,N,N,A,V,A,Acc):- Acc<4, accW(Acc), write("RUR'U'R'FR2U'R'U'RUR'F'").
-end(R,V,R,V,R,N,A,N,V,N,A,A,Acc):- Acc<4, accW(Acc), write("R'U2RU2R'FRUR'U'R'F'R2U'").
-end(R,V,V,N,R,R,V,N,N,A,A,A,Acc):- Acc<4, accW(Acc), write("RUR'F'RUR'U'R'FR2U'R'U'").
-end(A,N,V,N,V,A,R,R,R,V,A,N,Acc):- Acc<4, accW(Acc), write("R'U2R'd'R'F'R2U'R'UR'FRU'F").
+end(  R,A,R,  V,V,N,  A,N,V,  N,R,A,  Acc):- Acc<4, accW(Acc), write("LU2'L'U2'LF'L'U'LULFL2'U").
+end(  V,V,V,  N,N,A,  R,R,N,  A,A,R,  Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'R'U2RLU'").
+end(  R,R,V,  N,A,R,  V,N,N,  A,V,A,  Acc):- Acc<4, accW(Acc), write("RUR'U'R'FR2U'R'U'RUR'F'").
+end(  R,V,R,  V,R,N,  A,N,V,  N,A,A,  Acc):- Acc<4, accW(Acc), write("R'U2RU2R'FRUR'U'R'F'R2U'").
+end(  R,V,V,  N,R,R,  V,N,N,  A,A,A,  Acc):- Acc<4, accW(Acc), write("RUR'F'RUR'U'R'FR2U'R'U'").
+end(  A,N,V,  N,V,A,  R,R,R,  V,A,N,  Acc):- Acc<4, accW(Acc), write("R'U2R'd'R'F'R2U'R'UR'FRU'F").
 
-end(R,R,N,A,N,V,N,V,R,V,A,A,Acc):- Acc<4, accW(Acc), write("R'UR'd'R'F'R2U'R'UR'FRF").
-end(A,V,V,N,R,R,V,A,A,R,N,N,Acc):- Acc<4, accW(Acc), write("LU'RU2L'UR'LU'RU2L'UR'U").
-end(R,R,N,A,V,V,N,A,R,V,N,A,Acc):- Acc<4, accW(Acc), write("FRU'R'U'RUR'F'{RUR'U'R'FRF'").
-end(A,A,V,N,N,R,V,V,A,R,R,N,Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'LR'UL'U2RU'LU'").
+end(  R,R,N,  A,N,V,  N,V,R,  V,A,A,  Acc):- Acc<4, accW(Acc), write("R'UR'd'R'F'R2U'R'UR'FRF").
+end(  A,V,V,  N,R,R,  V,A,A,  R,N,N,  Acc):- Acc<4, accW(Acc), write("LU'RU2L'UR'LU'RU2L'UR'U").
+end(  R,R,N,  A,V,V,  N,A,R,  V,N,A,  Acc):- Acc<4, accW(Acc), write("FRU'R'U'RUR'F'{RUR'U'R'FRF'").
+end(  A,A,V,  N,N,R,  V,V,A,  R,R,N,  Acc):- Acc<4, accW(Acc), write("R'UL'U2RU'LR'UL'U2RU'LU'").
 
-end(A,R,R,V,N,A,R,A,V,N,V,N,Acc):- Acc<4, accW(Acc), write("R2uR'UR'U'Ru'R2y'R'UR").
-end(A,N,R,V,V,A,R,A,V,N,R,N,Acc):- Acc<4, accW(Acc), write("RUR'y'R2u'RU'R'UR'uR2").
-end(A,V,R,V,N,A,R,R,V,N,A,N,Acc):- Acc<4, accW(Acc), write("R2u'RU'RUR'uR2yRU'R'").
-end(A,V,R,V,A,A,R,N,V,N,R,N,Acc):- Acc<4, accW(Acc), write("R'U'RyR2uR'URU'Ru'R2").
+end(  A,R,R,  V,N,A,  R,A,V,  N,V,N,  Acc):- Acc<4, accW(Acc), write("R2uR'UR'U'Ru'R2y'R'UR").
+end(  A,N,R,  V,V,A,  R,A,V,  N,R,N,  Acc):- Acc<4, accW(Acc), write("RUR'y'R2u'RU'R'UR'uR2").
+end(  A,V,R,  V,N,A,  R,R,V,  N,A,N,  Acc):- Acc<4, accW(Acc), write("R2u'RU'RUR'uR2yRU'R'").
+end(  A,V,R,  V,A,A,  R,N,V,  N,R,N,  Acc):- Acc<4, accW(Acc), write("R'U'RyR2uR'URU'Ru'R2").
 
 end(A,B,C,D,E,F,G,H,I,J,K,L,Acc):- 	Acc<3, 
 									Acc1 is Acc+1, 
