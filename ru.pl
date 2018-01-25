@@ -1,3 +1,6 @@
+% Autor: Alejandro Lorenzo Dávila alu0100952100@ull.edu.es
+
+
 help:-write("
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\x1B[1m\x1B[34m       FUNCIONES PRINCIPALES                                                                    	\x1B[0m%
@@ -148,12 +151,11 @@ accW(2):- write("U2+").
 accW(3):- write("U'+").
 
 
-%writes([A|B]):-write(A),write(' '),writes(B).
-%writes([A|[]]):-write(A).
 
 % esquina(A,B,C,D,L,Acc):-blanca_esquina(A,B,C,D,A1,B1,C1,D1), esquina(A1,B1,C1,D1,L,Acc).
 %esquima izq
 %blanca_esquina(f,7,C,D,A,B,E,F):-write('L\'UUL+'),
+% Autor: Alejandro Lorenzo Dávila alu0100952100 @ull.edu.es
 %girar_L(f,7,A1,B1), girar_L(A1,B1,A2,B2), girar_L(A2,B2,A3,B3), girar_U(A3,B3,A4,B4), girar_U(A4,B4,A5,B5),girar_L(A5,B5,A,B),
 %girar_L(C,D,C1,D1), girar_L(C1,D1,C2,D2), girar_L(C2,D2,C3,D3), girar_U(C3,D3,C4,D4), girar_U(C4,D4,C5,D5),girar_L(C5,D5,E,F),
 %writes([A1,B1,A2,B2,A3,B3,A4,B4,A5,B5,A,B]).
@@ -394,5 +396,5 @@ end(A,B,C,D,E,F,G,H,I,J,K,L,Acc):- 	Acc<3,
 									end(J,K,L,A,B,C,D,E,F,G,H,I,Acc1).
 
 
-
+% Autor: Alejandro Lorenzo Dávila alu0100952100@ull.edu.es
 
